@@ -47,7 +47,7 @@
             var ateCount = prompt("כמה ארוחות אכלת כבר היום?");
             var countEat =parseFloat(5-parseFloat(ateCount));
             for (var i = 0; i < ateCount; i++) {
-             caloriotDay= caloriotDay- parseFloat(prompt("בארוחה"+" "+ parseFloat(parseFloat(i) + 1)+" " + "כמה קלוריות אכלת ?"));
+             caloriotDay= caloriotDay- parseFloat(prompt("בארוחה"+" "+ parseFloat(parseFloat(i) + 1)+" " + "כמה קלוריות אכלת ?","דגהדג"));
              helbonDay= helbonDay- parseFloat(prompt("בארוחה"+" "+ parseFloat(parseFloat(i) + 1)+" " + "כמה גרם חלבון אכלת ?"));
             }
             alert("אתה צריך לאכול עוד "+countEat+" ארוחות , שבכל ארוחה "+caloriotDay/countEat+" קלוריות, "+helbonDay/countEat+" גרם חלבון" );
