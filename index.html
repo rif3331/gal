@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <title>GAL Shaked</title>
+    <style>
+        img {
+            opacity: 1.0;
+        }
+
+        img:hover {
+            opacity: 1.0;
+        }
+
+        .img {
+            opacity: 1.0;
+        }
+
+        body {
+            font-family: Audiowide;
+        }
+
+        .stretch {
+            background: no-repeat center center fixed;
+            background-position-y: top;
+
+            direction: rtl;
+        }
+
+        .ggg {
+            direction: rtl;
+            background: no-repeat center center fixed;
+            background-size: cover;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            background-size: 120% 100%;
+            background-image: url('https://img.wallpapersafari.com/desktop/1536/864/38/12/nHP5N4.jpg');
+        }
+    </style>
+    <script type="text/javascript">
+
+        function onLoad() {
+            var caloriotDay = prompt("כמה קלוריות תרצה לאכול היום?");
+            var helbonDay = prompt("כמה גרם חלבון תרצה לאכול היום?");
+            var ateCount = prompt("כמה ארוחות אכלת כבר היום?");
+            var countEat =parseFloat(5-parseFloat(ateCount));
+            for (var i = 0; i < ateCount; i++) {
+             caloriotDay= caloriotDay- parseFloat(prompt("בארוחה"+" "+ parseFloat(parseFloat(i) + 1)+" " + "כמה קלוריות אכלת ?"));
+             helbonDay= helbonDay- parseFloat(prompt("בארוחה"+" "+ parseFloat(parseFloat(i) + 1)+" " + "כמה גרם חלבון אכלת ?"));
+            }
+            alert("אתה צריך לאכול עוד "+countEat+" ארוחות , שבכל ארוחה "+caloriotDay/countEat+" קלוריות, "+helbonDay/countEat+" גרם חלבון" );
+
+
+        }
+
+    </script>
+</head>
+
+<body id="body" onload="onLoad()" class="ggg">
+    <form id="form1" runat="server">
+
+        </div>
+    </form>
+</body>
+
+</html>
