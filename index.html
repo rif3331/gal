@@ -178,41 +178,176 @@
             var cell3 = row.insertCell(0);
             cell1.style.fontSize = "18px";
             cell1.style.color = "black";
-            cell1.innerHTML = "אתה צריך לאכול עוד " + countEat+ " ארוחות, בכל הארוחה-";
+            cell1.innerHTML = "אתה צריך לאכול עוד " + countEat + " ארוחות, בכל הארוחה-";
             cell2.style.fontSize = "18px";
             cell2.style.color = "black";
-            cell2.innerHTML =calDish+ " קלוריות";
+            cell2.innerHTML = calDish + " קלוריות";
             cell3.style.fontSize = "18px";
             cell3.style.color = "black";
-            cell3.innerHTML =halDish + " גרם חלבון";
-            if(ccaloriotDay>=caloriotDay)
-            {
-                cell2.innerHTML ="אכלת מספיק קלוריות"; 
+            cell3.innerHTML = halDish + " גרם חלבון";
+            if (ccaloriotDay >= caloriotDay) {
+                cell2.innerHTML = "אכלת מספיק קלוריות";
             }
-            if(chelbonDay>=helbonDay)
-            {
-                cell3.innerHTML ="אכלת מספיק גרם חלבון"; 
+            if (chelbonDay >= helbonDay) {
+                cell3.innerHTML = "אכלת מספיק גרם חלבון";
             }
             //   alert("אתה צריך לאכול עוד " + countEat + " ארוחות , שבכל ארוחה " + caloriotDay / countEat + " קלוריות, " + helbonDay / countEat + " גרם חלבון");
         }
 
+        function click(change) {
+            document.getElementById("c"+change).disabled=false;
+            document.getElementById("h"+change).disabled=false;
+        }
+
+        function chak(e, change) {
+            if (e.value != "" && e.value != null && !isNaN(e.value)) {
+                var c1 = document.getElementById("c1").value;
+                var c2 = document.getElementById("c2").value;
+                var c3 = document.getElementById("c3").value;
+                var c4 = document.getElementById("c4").value;
+                var c5 = document.getElementById("c5").value;
+                var h1 = document.getElementById("h1").value;
+                var h2 = document.getElementById("h2").value;
+                var h3 = document.getElementById("h3").value;
+                var h4 = document.getElementById("h4").value;
+                var h5 = document.getElementById("h5").value;
+                var countC = 0;
+                var countH = 0;
+                var sumC = 0;
+                var sumH = 0;
+                var caloriotDay = document.getElementById("caloriotDay").value;
+                var helbonDay = document.getElementById("helbonDay").value;
+                var number = change.split("c");
+                number[1] = parseFloat(number[1]) + 1;
+
+                var number2 = change.split("h");
+                number2[1] = parseFloat(number2[1]) + 1;
+
+                for (var i = 1; i < 6; i++) {
+                    if (document.getElementById("c" + i.toString()).disabled)
+                    {
+                        countC++;
+                    }
+                    else
+                    {
+                        sumC+=parseInt(document.getElementById("c" + i.toString()).value);
+                    }
+                    if (document.getElementById("h" + i.toString()).disabled)
+                    {
+                        countH++;
+                    }
+                    else
+                    {
+                        sumH+=parseInt(document.getElementById("h" + i.toString()).value);
+                    }
+                }
+            
+                // if()
+                // alert("sum= "+parseFloat(caloriotDay-sumC)+ " lhalk= "+countC);
+                // alert(parseFloat(caloriotDay-sumC)/countC);
+                 for (var i = 1; i < 6; i++) {
+                    if (document.getElementById("c" + i.toString()).disabled)
+                    {
+                        document.getElementById("c" + i.toString()).value =parseFloat(caloriotDay-sumC)/countC;
+
+                        if(parseFloat(caloriotDay-sumC)/countC<0)
+                        document.getElementById("c" + i.toString()).value="אין צורך";
+
+                    }
+                }
+            }
+            else {
+                document.getElementById(change).value = document.getElementById(change).value.slice(0, document.getElementById(change).value.length - 1);
+            }
+        }
+
+        function loadd() {
+            document.getElementById("c1").onkeyup = function () { chak(this, "c1") }
+            document.getElementById("c2").onkeyup = function () { chak(this, "c2") }
+            document.getElementById("c3").onkeyup = function () { chak(this, "c3") }
+            document.getElementById("c4").onkeyup = function () { chak(this, "c4") }
+            document.getElementById("h1").onkeyup = function () { chak(this, "h1") }
+            document.getElementById("h2").onkeyup = function () { chak(this, "h2") }
+            document.getElementById("h3").onkeyup = function () { chak(this, "h3") }
+            document.getElementById("h4").onkeyup = function () { chak(this, "h4") }
+
+            document.getElementById("c11").onclick = function () { click("1") }
+            document.getElementById("c22").onclick = function () { click("2") }
+            document.getElementById("c33").onclick = function () { click("3") }
+            document.getElementById("c44").onclick = function () { click("4") }
+      
+
+
+        }
 
     </script>
 </head>
 
-<body id="body" class="ggg">
+<body id="body" class="ggg" onload="loadd()">
     <form id="form1" runat="server">
-        <table style="text-align:center" class="myButton">
+        <table style="text-align:center;line-height:130%" class="myButton">
             <tr>
-                <td> קלוריות ביום</td>
-                <td> גרם חלבון ביום</td>
+                <td colspan="2"> קלוריות ביום</td>
+                <td colspan="2"> גרם חלבון ביום</td>
             </tr>
             <tr>
-                <td><input value="2900" type="text" id="caloriotDay"></td>
-                <td><input value="20" type="text" id="helbonDay"></td>
+                <td colspan="2"><input style="text-align:center;" value="2900" type="text" id="caloriotDay"></td>
+                <td colspan="2"><input style="text-align:center;" value="100" type="text" id="helbonDay"></td>
+            </tr>
+            <tr>
+                <th style=" border-bottom: 5px solid black;" colspan="4"> ארוחה 1</th>
+            </tr>
+            <tr id="c11">
+                <td> קלוריות </td>
+                <td><input type="text" disabled="true" value="580" id="c1"></td>
+                <td> גרם חלבון </td>
+                <td><input type="text" disabled="true" value="20" id="h1"></td>
+            </tr>
+            <tr>
+                <th style=" border-bottom: 5px solid black;" colspan="4"> ארוחה 2</th>
+            </tr>
+            <tr id="c22">
+                <td> קלוריות </td>
+                <td><input type="text" disabled="true" value="580" id="c2"></td>
+                <td> גרם חלבון </td>
+                <td><input type="text" disabled="true" value="20" id="h2"></td>
+            </tr>
+            <tr>
+                <th style=" border-bottom: 5px solid black;" colspan="4"> ארוחה 3</th>
+            </tr>
+            <tr id="c33">
+                <td> קלוריות </td>
+                <td><input type="text" disabled="true" value="580" id="c3"></td>
+                <td> גרם חלבון </td>
+                <td><input type="text" disabled="true" value="20" id="h3"></td>
+            </tr>
+            <tr>
+                <th style=" border-bottom: 5px solid black;" colspan="4"> ארוחה 4</th>
+            </tr>
+            <tr id="c44">
+                <td> קלוריות </td>
+                <td><input type="text" disabled="true" value="580" id="c4"></td>
+                <td> גרם חלבון </td>
+                <td><input type="text" disabled="true" value="20" id="h4"></td>
+            </tr>
+            <tr>
+                <th style=" border-bottom: 5px solid black;" colspan="4"> ארוחה 5</th>
+            </tr>
+            <tr>
+                <td> קלוריות </td>
+                <td><input type="text" disabled="true" value="580" id="c5"></td>
+                <td> גרם חלבון </td>
+                <td><input type="text" disabled="true" value="20" id="h5"></td>
             </tr>
         </table>
-        <table id="ateCount" style="text-align:center" class="myButton">
+
+
+
+
+
+
+
+        <table id="ateCount" style="text-align:center;visibility: hidden;" class="myButton">
             <tr>
                 <td>כמה ארוחות אכלת כבר היום?</td>
                 <br>
